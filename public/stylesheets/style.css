@@ -1,0 +1,21 @@
+body {
+  padding-top: 50px;
+  font: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+img.main {
+  box-shadow: 0 0.2rem 0.3rem 0.3rem #888;
+  border-radius:100%
+}
+p {
+  font-size: 2.4rem;
+}
+input {
+  display:block;
+  width:100%;
+  margin-bottom: 1.6rem !important;
+}
