@@ -15,7 +15,11 @@ Template.images.helpers({
 // Holy shit this works for any element...
 //
 Template.images.events({
-	'click img': function(e,t) {
+	'click canvas': function(e,t) {
 		alert("you clicked on (" + e.offsetX +", " + e.offsetY + ")");
+		var c = e.target;
+		var ctx = c.getContext('2d');
+		var img = document.getElementById('test');
+		ctx.drawImage(img, e.offsetX, e.offsetY);
 	}
 });
