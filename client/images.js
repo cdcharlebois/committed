@@ -20,9 +20,10 @@ Template.images.events({
 		var c = e.target;
 		var ctx = c.getContext('2d');
 		var img = document.getElementById('test'); // 235x235
-		var iw = 235;
-		var ih = 235;
 		(Session.get('angle') ? '' : Session.set('angle', 0));
+		(Session.get('scale') ? '' : Session.set('scale', 1));
+		var iw = 235 * Session.get('scale');
+		var ih = 235 * Session.get('scale');
 		// Session.set('angle')
 		//
 		// rotate context 
@@ -30,10 +31,11 @@ Template.images.events({
 		var TO_RADIANS = Math.PI/180;
 		ctx.translate(e.offsetX, e.offsetY); // center of the image on the canvas.
 		ctx.rotate(Session.get('angle')*TO_RADIANS); 
-		ctx.drawImage(img, -iw/2, -ih/2, iw, ih); // (img, -width/2, -height/2, width, height)
+		ctx.drawImage(img, -iw/2, -ih/2, iw, ih); // (img, -width/2, -height/2)
 		ctx.rotate(Session.get('angle')*TO_RADIANS*-1); // pi
 		ctx.translate(-1*e.offsetX, -1*e.offsetY)
 
 		Session.set('angle', (Session.get('angle') + 45)*1);
+		Session.set('scale', (Session.get('scale') + 0.1)*1);
 	}
 });
