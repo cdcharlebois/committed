@@ -57,7 +57,7 @@ Template.images.events({
 		Session.set('angle', (Session.get('angle') + 45)*1);
 		Session.set('scale', (Session.get('scale') + 0.1)*1);
 	},
-	'click h3': function(e,t){
+	'click button': function(e,t){
 		var c = document.getElementById('2');
 		var ctx = c.getContext('2d');
 		var img = document.getElementById('test'); // 235x235
