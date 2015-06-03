@@ -19,6 +19,9 @@ Template.images.helpers({
 	},
 	points: function(){
 		return Session.get('points');
+	},
+	message: function(){
+		return Session.get('message') || '';
 	}
 });
 //
@@ -62,6 +65,7 @@ Template.images.events({
 		var ctx = c.getContext('2d');
 		var img = document.getElementById('test'); // 235x235
 		ctx.drawImage(img, 0, 0, 235*2, 235*2);
+		Session.set('message', "now click on my eyes to place the glasses");
 	},
 	'click canvas#2': function(e,t) {
 		// check to see if there's a partial already
