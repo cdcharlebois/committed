@@ -10,10 +10,15 @@
 	</div> -->
 	<div class="row">
 		<div class="col-md-3">
+			<select>
+				{{#each clothing}}
+					<option value="{{_id}}">{{name}}</option>
+				{{/each}}
+			</select>
 			<h3>Points</h3>
 			<button>Click to load my face</button><br>
 			{{#each points}}
-				[{{this}}] <br>
+				[{{x}},{{y}}] <br>
 			{{/each}}
 		</div>
 		<div class="col-md-9">

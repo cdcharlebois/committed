@@ -1,9 +1,4 @@
 Session.set('points', []);
-Session.set('partial', null);
-var GLASSES_TARGETS = [
-	[150,100],
-	[450,100]
-];
 
 // ---------------------------------------------------- //
 //    How to match two images based on target points    //
@@ -14,51 +9,19 @@ var GLASSES_TARGETS = [
 //    b) Rotation -- using slope from A-B to A'-B' as a measure
 //    c) Translation -- using dx/dy from A to A' as a measure
 Template.images.helpers({
-	foobar: function(){
-		return "Foobar";
-	},
 	points: function(){
 		return Session.get('points');
 	},
-	message: function(){
-		return Session.get('message') || '';
+	clothing: function(){
+		return Clothing.find().fetch();
 	}
 });
 //
 // Holy shit this works for any element...
 //
 Template.images.events({
-	'click canvas#1': function(e,t) {
-		var TO_RADIANS = Math.PI/180;
-		var c = e.target;
-		var ctx = c.getContext('2d');
-		var img = document.getElementById('test'); // 235x235
-		(Session.get('angle') ? '' : Session.set('angle', 0));
-		(Session.get('scale') ? '' : Session.set('scale', 1));
-		var iw = 235 * Session.get('scale');
-		var ih = 235 * Session.get('scale');
-		//
-		// move the center of the image to the center of the context
-		//
-		ctx.translate(e.offsetX, e.offsetY);
-		//
-		// rotate the context to the specified angle
-		//
-		ctx.rotate(Session.get('angle')*TO_RADIANS); 
-		//
-		// draw image
-		//  * note because we moved the context, the top-left part of the
-		//    image needs to slide up and left
-		//
-		ctx.drawImage(img, -iw/2, -ih/2, iw, ih); // (img, -width/2, -height/2)
-		//
-		// now put it back the way you found it
-		//
-		ctx.rotate(Session.get('angle')*TO_RADIANS*-1); // pi
-		ctx.translate(-1*e.offsetX, -1*e.offsetY)
-
-		Session.set('angle', (Session.get('angle') + 45)*1);
-		Session.set('scale', (Session.get('scale') + 0.1)*1);
+	'change select': function(e,t) {
+		Session.set('cid', e.target.value);
 	},
 	'click button': function(e,t){
 		var c = document.getElementById('2');
@@ -68,68 +31,90 @@ Template.images.events({
 		Session.set('message', "now click on my eyes to place the glasses");
 	},
 	'click canvas#2': function(e,t) {
-		// check to see if there's a partial already
+		//
+		// add the new click to `points`
+		//
 		var points = Session.get('points');
-		points.push([e.offsetX, e.offsetY])
+		points.push({
+			x: e.offsetX, 
+			y: e.offsetY
+		});
 		Session.set('points', points);
 
-		if (Session.get('points').length == 2){
+		if (Session.get('points').length % 2 == 0){
+			//
+			// Load the clothing
+			//
+			var article = Clothing.findOne(Session.get('cid'));
+
+
+			// ----------------- //
+			// Draw the clothing //
+			// ----------------- //
+			
+			//
+			// Set defaults
+			//
+			var scale = 1;
+			// target points
+			var p1 = points[points.length-2];
+			var p2 = points[points.length-1];
+			//
+			// make sure the left point is p1
+			//
+			if (p2.x < p1.x || p2.x === p1.x && p2.y < p1.y) {
+				var tmp = p1;
+				p1 = p2;
+				p2 = tmp;
+			}
+			// map points
+			var mapPoints = article.mapPoints;
+			var mp1 = mapPoints[0];
+			var mp2 = mapPoints[1];
+
 			//get all the shit for the glasses image
 			var c = e.target;
 			var ctx = c.getContext('2d');
-			var img = document.getElementById('glasses'); // 600x226
-			var iw = 600;
-			var ih = 226;
+			var img = new Image();
+			img.src = article.img;
+			var iw = img.width;
+			var ih = img.height;
+			
 			//
 			// get the scale
 			//
-			var scale = 1;
-			var init_points = Session.get('points');
-			//console.log(init_points);
-			var x1 = init_points[0][0],
-			    y1 = init_points[0][1],
-			    x2 = init_points[1][0],
-			    y2 = init_points[1][1];
-			var init_length = Math.sqrt(Math.pow(Math.abs(x1-x2),2) + Math.pow(Math.abs(y1-y2),2));
-			x1 = GLASSES_TARGETS[0][0],
-			y1 = GLASSES_TARGETS[0][1],
-			x2 = GLASSES_TARGETS[1][0],
-			y2 = GLASSES_TARGETS[1][1];
-			var fin_length = Math.sqrt(Math.pow(Math.abs(x1-x2),2) + Math.pow(Math.abs(y1-y2),2));
-			console.log('init: ' +init_length); 
-			console.log('fin: ' + fin_length);
-			scale = init_length/fin_length;
-			console.log('scale: ' + scale);
+			
+			// length of hypoteneuse on target
+			var targetLength = distanceBetweenPoints(p1, p2);
+			// length of same segment in the map
+			var maplength = distanceBetweenPoints(mp1, mp2);
+
+			scale = targetLength/maplength;
+			
 			//
 			// get the angle
 			//
-			x1 = init_points[0][0],
-			x2 = init_points[1][0],
-			y1 = init_points[0][1],
-			y2 = init_points[1][1];
-			var dx = x1-x2;
-			var dy = y1-y2;
-			console.log('dx: ' + dx);
-			var angle = Math.acos(Math.abs(dx)/init_length);
+			
+			// CAH     cos(x)  = adjacent / hypoteneuse
+			//         cos(x)  = dx / targetLength
+			//     arc(cos(x)) = arc( dx / targetLength )
+			//             x   = arc( dx / targetLength )
+			var dx = p1.x-p2.x;
+			var dy = p1.y-p2.y;
+			var angle = Math.acos(Math.abs(dx)/targetLength);
+			
+			// account for quandrants and all that
 			if (dx * dy < 0)
 				angle *= -1;
-			console.log('angle: ' + angle);
-			//
-			// get the offset
-			// * difference between init point A and glasses point A
-			var offset = [
-				init_points[0][0],
-				init_points[0][1]
-			]
-
+			
 			//
 			// draw the new image
 			//
-			ctx.translate(offset[0],offset[1]);
+			ctx.translate(p1.x,p1.y); // offset to the first target point
 			ctx.rotate(angle); 
-			ctx.drawImage(img, -GLASSES_TARGETS[0][0]*scale, -GLASSES_TARGETS[0][1]*scale, iw*scale, ih*scale); // (img, -width/2, -height/2)
+			ctx.drawImage(img, -mp1.x*scale, -mp1.y*scale, iw*scale, ih*scale); // (img, -width/2, -height/2)
 			ctx.rotate(-angle);
-			ctx.translate(-offset[0],-offset[1]);
+			ctx.translate(-p1.x,-p1.y);
 
 
 		}
