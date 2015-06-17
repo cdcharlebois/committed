@@ -1,0 +1,13 @@
+<template name="league">
+	<div class="container">
+		<h1>The League</h1>
+		{{> loginButtons}}
+		{{#if currentUser}}
+			Logged in as <strong>{{ currentUser.username }}</strong> <br>
+			<a href="/league/matches/create">Create a Match</a> <br>
+			<a href="/league/profile">My Profile</a> <br>
+			<a href="/league/matches">Open Matches</a> <br>
+		{{/if}}
+	</div>
+</template>
+
