@@ -1,5 +1,65 @@
 <template name="profile">
-	<div class="container">
+	<!-- The League Header -->
+	{{>leagueHeader}}
+	<!-- End Leage Header -->
+
+	<div class="container" id="main">
 		<h1>{{ currentUser.username }}</h1>
+		<h3>Conner Charlebois</h3>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Contact Info</h4>
+					</div>
+					<div class="panel-body">
+						<ul>
+							<li>Phone: <label>781-330-1240</label></li>
+							<li>Email: <label>cdcharlebois@gmail.com</label></li>
+						</ul>
+					</div>
+				</div>
+			</div>	
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>GHIN</h4>
+					</div>
+					<div class="panel-body">
+						<ul>
+							<li>GHIN #: <label>1234567890</label></li>
+							<li>HDCP: <label>5.0</label></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Match Preferences</h4>
+					</div>
+					<div class="panel-body">
+						<h6>Region:</h6> 
+						<select><option>West Boston</option></select>
+						<h6>Time Preference:</h6>
+						Days:
+						M<input type="checkbox">
+						T<input type="checkbox">
+						W<input type="checkbox">
+						R<input type="checkbox">
+						F<input type="checkbox">
+						S<input type="checkbox">
+						S<input type="checkbox">
+						<br>
+						<select><option>AM</option></select>
+						<h6>Cost Preference</h6>
+						<select><option>&lt; $40</option></select>
+					</div>
+				</div>
+			</div>	
+		</div>
+		
+
+		
 	</div>
 </template>

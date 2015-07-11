@@ -1,0 +1,18 @@
+<template name="leagueHeader">
+	<!-- The League Header -->
+	<div class="navbar navbar-default" id="subnav">
+		<div class="col-md-12">
+			<div class="navbar-header">
+				<ul class="nav navbar-nav navbar-right">
+					{{#if currentUser}}
+				    <li ><a id="profile" {{profile_active}} href="/league/profile">Profile</a></li>
+				    <li><a href="/" role="button" data-toggle="modal">Login</a></li>
+				    <li><a href="#aboutModal" role="button" data-toggle="modal">About</a></li>
+				    {{/if}}
+				    <li>{{>loginButtons}}</li>
+				</ul>	
+			</div>
+		</div>
+	</div>
+	<!-- End Leage Header -->
+</template>
