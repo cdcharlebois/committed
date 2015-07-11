@@ -1,13 +1,30 @@
 Template.profile.helpers({
-
+	canEdit: function(){
+		return Session.get('canEdit');
+	}
 });
 
 Template.profile.events({
-	'click .edit':function(e,t){
-		console.log(e.target.id);
-		var toEdit = e.target.id.substring(5);
-		console.log(toEdit);
+	'click #edit': function() {
+		Session.set('canEdit', true);
+	},
+	'click #done':function(e,t) {
+		var data = {
+			name: 		t.find('#inputName').value,
+			contact: {
+				phone: 	formatPhoneNumber(t.find('#inputPhone').value),
+				email: 	t.find('#inputEmail').value
+			},
+			ghin: {
+				number: t.find('#inputGhin').value
+			},
+			prefs: {
 
-		//set the input for the edit button to not read-only
+			}
+		}
+
+		Meteor.users.update({_id:Meteor.userId()}, {$set: {profile: data}});
+
+		Session.set('canEdit', false);
 	}
 });
