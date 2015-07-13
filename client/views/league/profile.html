@@ -23,9 +23,11 @@
 							{{#if canEdit}}
 								<li>Phone: <input type="text" id="inputPhone" name="phone" value="{{currentUser.profile.contact.phone}}"></li>
 								<li>Email: <input id="inputEmail" type="text" value="{{currentUser.profile.contact.email}}"/></li>	
+								<li>Address: <input id="inputAddress" type="text" value="{{currentUser.profile.contact.address}}"/><small>We use this to find matches near you.</small></li>	
 							{{else}}
 								<li>Phone: <label>{{currentUser.profile.contact.phone}}</label></li>
 								<li>Email: <label>{{currentUser.profile.contact.email}}</label></li>
+								<li>Address: <label>{{currentUser.profile.contact.address}}</label></li>
 							{{/if}}
 							
 						</ul>
@@ -55,45 +57,78 @@
 						<h4>Match Preferences</h4>
 					</div>
 					<div class="panel-body">
-						<h6>Region:</h6> 
-						<select><option>West Boston</option></select>
+						<h6>Willing to travel:</h6> 
+						{{#if canEdit}}
+							<select name="radius" id="inputPrefRadius">
+								<option value="5">5 miles</option>
+								<option value="15">15 miles</option>
+								<option value="25">25 miles</option>
+								<option value="30+">30+ miles</option>
+							</select>
+						{{else}}
+							{{myRadiusPref}}
+						{{/if}}
 						<h6>Time Preference:</h6>
-							<table class="table">
-								<tr>
-									<td></td>
-									<td>M</td>
-									<td>T</td>
-									<td>W</td>
-									<td>R</td>
-									<td>F</td>
-									<td>S</td>
-									<td>S</td>
-								</tr>
-								<tr>
-									<td>AM</td>
-									<td><input type="checkbox" id="inputDay1"></td>
-									<td><input type="checkbox" id="inputDay2"></td>
-									<td><input type="checkbox" id="inputDay3"></td>
-									<td><input type="checkbox" id="inputDay4"></td>
-									<td><input type="checkbox" id="inputDay5"></td>
-									<td><input type="checkbox" id="inputDay6"></td>
-									<td><input type="checkbox" id="inputDay7"></td>
-								</tr>
-								<tr>
-									<td>PM</td>
-									<td><input type="checkbox" id="inputDay11"></td>
-									<td><input type="checkbox" id="inputDay12"></td>
-									<td><input type="checkbox" id="inputDay13"></td>
-									<td><input type="checkbox" id="inputDay14"></td>
-									<td><input type="checkbox" id="inputDay15"></td>
-									<td><input type="checkbox" id="inputDay16"></td>
-									<td><input type="checkbox" id="inputDay17"></td>
-								</tr>
-							</table>
-						<br>
-						<select><option>AM</option></select>
+						{{#each myTimePrefs}}
+							<strong>{{day}}</strong> &mdash; From: {{fromTime}} to: {{toTime}} <br>
+						{{/each}}
+						{{#if canEdit}}
+							{{#if canAddTimePref}}
+								<br>
+								Day:
+									<select name="day" id="inputPrefDay">
+										<option value="M">Monday</option>
+										<option value="T">Tuesday</option>
+										<option value="W">Wednesday</option>
+										<option value="R">Thursday</option>
+										<option value="F">Friday</option>
+										<option value="Sa">Saturday</option>
+										<option value="Su">Sunday</option>
+									</select> 
+								From:
+									<select name="fromTime" id="inputPrefFrom">
+										<option value="6">6:00 AM</option>
+										<option value="7">7:00 AM</option>
+										<option value="8">8:00 AM</option>
+										<option value="9">9:00 AM</option>
+										<option value="10">10:00 AM</option>
+										<option value="11">11:00 AM</option>
+										<option value="12">12:00 PM</option>
+										<option value="13">1:00 PM</option>
+										<option value="14">2:00 PM</option>
+										<option value="15">3:00 PM</option>
+										<option value="16">4:00 PM</option>
+										<option value="17">5:00 PM</option>
+										<option value="18">6:00 PM</option>
+									</select>
+								To:
+									<select name="toTime" id="inputPrefTo">
+										<option value="6">6:00 AM</option>
+										<option value="7">7:00 AM</option>
+										<option value="8">8:00 AM</option>
+										<option value="9">9:00 AM</option>
+										<option value="10">10:00 AM</option>
+										<option value="11">11:00 AM</option>
+										<option value="12">12:00 PM</option>
+										<option value="13">1:00 PM</option>
+										<option value="14">2:00 PM</option>
+										<option value="15">3:00 PM</option>
+										<option value="16">4:00 PM</option>
+										<option value="17">5:00 PM</option>
+										<option value="18">6:00 PM</option>
+									</select>
+								<button class="btn btn-success" id="addTimePrefDone">&check; Done</button>
+
+							{{else}}
+							<button class="btn btn-info" id="addTimePref">&plus; Add </button>
+							{{/if}}
+						{{/if}}
 						<h6>Cost Preference</h6>
-						<select><option>&lt; $40</option></select>
+						{{#if canEdit}}
+							<select name="cost" id="inputPrefCost"><option value="40">&lt; $40</option></select>
+						{{else}}
+							{{myCostPref}}
+						{{/if}}
 					</div>
 				</div>
 			</div>	
