@@ -1,0 +1,13 @@
+<template name="matches">
+	
+	<div id="main">
+		<a href="/league/matches/create" class="btn btn-primary">Create Match</a>	
+		<h1>Matches</h1>
+		<ol>
+			{{#each allMatches}}
+				<li>{{_id}} <label class="label label-danger">vs</label> {{playerOne.profile.name}}</li>
+			{{/each}}	
+		</ol>
+		
+	</div>
+</template>

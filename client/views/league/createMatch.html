@@ -1,7 +1,61 @@
 <template name="createMatch">
 	<div class="container">
-		<form action="post" method="league/matches">
-			<input type="checkbox" name="ranked"> Ranked? 
-		</form>	
+	<h1>Create a new Match Request</h1>
+			{{#if userHasGhin}}
+			<input type="checkbox" name="inputRanked" id="inputRanked"> Ranked? <br>
+			{{/if}}
+			Within <input type="number" id="inputRadius"> miles <br>
+			{{#each times}}
+				<strong>{{day}}</strong> &mdash; From: {{fromTime}} to: {{toTime}} <br> 
+			{{/each}}
+			{{#if canAddTimePref}}
+			Day:
+				<select name="day" id="inputPrefDay">
+					<option value="M">Monday</option>
+					<option value="T">Tuesday</option>
+					<option value="W">Wednesday</option>
+					<option value="R">Thursday</option>
+					<option value="F">Friday</option>
+					<option value="Sa">Saturday</option>
+					<option value="Su">Sunday</option>
+				</select> 
+			From:
+				<select name="fromTime" id="inputPrefFrom">
+					<option value="6">6:00 AM</option>
+					<option value="7">7:00 AM</option>
+					<option value="8">8:00 AM</option>
+					<option value="9">9:00 AM</option>
+					<option value="10">10:00 AM</option>
+					<option value="11">11:00 AM</option>
+					<option value="12">12:00 PM</option>
+					<option value="13">1:00 PM</option>
+					<option value="14">2:00 PM</option>
+					<option value="15">3:00 PM</option>
+					<option value="16">4:00 PM</option>
+					<option value="17">5:00 PM</option>
+					<option value="18">6:00 PM</option>
+				</select>
+			To:
+				<select name="toTime" id="inputPrefTo">
+					<option value="6">6:00 AM</option>
+					<option value="7">7:00 AM</option>
+					<option value="8">8:00 AM</option>
+					<option value="9">9:00 AM</option>
+					<option value="10">10:00 AM</option>
+					<option value="11">11:00 AM</option>
+					<option value="12">12:00 PM</option>
+					<option value="13">1:00 PM</option>
+					<option value="14">2:00 PM</option>
+					<option value="15">3:00 PM</option>
+					<option value="16">4:00 PM</option>
+					<option value="17">5:00 PM</option>
+					<option value="18">6:00 PM</option>
+				</select>
+			<button class="btn btn-success" id="addTimePrefDone">&check; Done</button>
+			{{else}}
+			<button class="btn btn-info" id="addTimePref">&plus; Add </button> <br>
+			{{/if}}
+			<select name="cost" id="inputCost"><option value="40">&lt; $40</option></select> <br>
+			<button id="submit" class="btn btn-primary">Submit</button>
 	</div>
 </template>
