@@ -1,8 +1,13 @@
 <template name="matches">
-	
-	<div id="main">
-		<a href="/league/matches/create" class="btn btn-primary">Create Match</a>	
+    {{>leagueHeader}}	
+	<div class="container">
 		<h1>Matches</h1>
+		<div class="fixed-action-btn" style="bottom:45px; right:24px">
+			<a href="/league/matches/create" class="btn-floating btn-large red">
+				<i class="material-icons">add</i>
+			</a>		
+		</div>
+		
 		<ol>
 			{{#each allMatches}}
 				<li>{{_id}} <label class="label label-danger">vs</label> {{playerOne.profile.name}}</li>

@@ -1,10 +1,23 @@
 <template name="createMatch">
+{{>leagueHeader}}
 	<div class="container">
 	<h1>Create a new Match Request</h1>
 			{{#if userHasGhin}}
-			<input type="checkbox" name="inputRanked" id="inputRanked"> Ranked? <br>
+			<div class="switch">
+				<label>
+					Unranked
+					<input type="checkbox" name="inputRanked" id="inputRanked">
+					<span class="lever"></span>		
+					Ranked
+				</label>
+			</div>
 			{{/if}}
-			Within <input type="number" id="inputRadius"> miles <br>
+			<br>
+			Match Radius:
+			<p class="range-field">
+				<input type="range" min="0" max="100" id="inputRadius">
+			</p>
+			<!-- Within <input type="number" id="inputRadius"> miles <br> -->
 			{{#each times}}
 				<strong>{{day}}</strong> &mdash; From: {{fromTime}} to: {{toTime}} <br> 
 			{{/each}}
@@ -56,6 +69,6 @@
 			<button class="btn btn-info" id="addTimePref">&plus; Add </button> <br>
 			{{/if}}
 			<select name="cost" id="inputCost"><option value="40">&lt; $40</option></select> <br>
-			<button id="submit" class="btn btn-primary">Submit</button>
+			<button id="submit" class="btn green">Submit</button>
 	</div>
 </template>
