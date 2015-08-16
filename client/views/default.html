@@ -1,14 +1,28 @@
 <template name="layout">
-	<head>
-		<title>CommitTo:Meteor</title>
-		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">-->
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-	</head>
+    <head>
+        <title>CommitTo:Meteor</title>
+        <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css"> -->
+        <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    </head>
 
-	<body>
-		<nav class="navbar navbar-default navbar-fixed-top">
+    <body>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper green darken-2">
+                    <a class="brand-logo center" href="/"><i class="large material-icons">code</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="/work">Work</a></li>
+                        <li><a href="/golf">Golf</a></li>
+                        <li><a href="/league">The League</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- <nav class="navbar navbar-fixed-top header">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -17,7 +31,6 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <!-- <a class="navbar-brand" href="/">Conner Charlebois</a> -->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -26,11 +39,11 @@
             <li><a href="/work">Work</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
-    </nav>
-  		{{> yield}}
-	</body>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-</template>	
+    </nav> -->
+        {{> yield}}
+    </body>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+</template>
