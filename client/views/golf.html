@@ -1,6 +1,14 @@
 <template name="golf">
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper green lighten-2">
+				<ul class="left">
+					{{>loginButtons}}
+				</ul>
+			</div>
+		</nav>
+	</div>
 	<div class="container" id="main">
-		<h1>Golf</h1>
 		{{#if canAddRound}}
 			{{>roundInput}}
 		{{else}}
