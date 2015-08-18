@@ -1,34 +1,71 @@
 <template name="golf">
 	<div class="container" id="main">
 		<h1>Golf</h1>
-		{{#if canAdd}}
+		{{#if canAddRound}}
 			{{>roundInput}}
 		{{else}}
 			<p>Enter a new round: <button class="btn-floating btn-large waves-effect waves-light" id="addRound"><i class="material-icons">add</i></button>
 </p>
 		{{/if}}
+		{{#if canAddPractice}}
+			{{>practiceInput}}
+		{{else}}
+			<p>Enter a new practice session: <button class="btn-floating btn-large waves-effect waves-light" id="addPractice"><i class="material-icons">add</i></button>
+</p>
+		{{/if}}
+
+		<div class="row">
+			<div class="col s12 m6">
+				<div class="card">
+					<div class="card-content">
+					<div class="row">	
+						<div class="col m6">
+							<h5>4 FEET</h5>	
+							<h4 class="blue-text text-darken-2">{{avgFour}}%</h4>
+						</div>
+						<div class="col m6">
+							<h5>7 FEET</h5>	
+							<h4 class="blue-text text-darken-2">{{avgSeven}}%</h4>
+						</div>
+					</div>	
+					<h3>Recent Practice</h3>
+						{{#each practices}}
+							<label>4 ft:</label> {{fourPct}}% <label>7 ft:</label> {{sevenPct}}% <br>
+						{{/each}}
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m6">
+				<div class="card">
+					<div class="card-content">
+						<h3>Recent Rounds</h3>	
+						{{#each rounds}}
+							<div class="row">
+								<div class="col s12">
+									{{name}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col s3">
+									<label>Score:</label> {{score}}
+								</div>
+								<div class="col s3">
+									<label>FIR:</label> TBD
+								</div>
+								<div class="col s3">
+									<label>GIR:</label> TBD
+								</div>
+								<div class="col s3">
+									<label>Putts:</label> TBD
+								</div>
+							</div>
+						{{/each}}			
+					</div>
+				</div>
+			</div>
+		</div>
 		<h2>Previous Rounds</h2>
-		{{#each rounds}}
-			<div class="row">
-				<div class="col s12">
-					{{name}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s3">
-					Score: {{score}}
-				</div>
-				<div class="col s3">
-					FIR: TBD
-				</div>
-				<div class="col s3">
-					GIR: TBD
-				</div>
-				<div class="col s3">
-					Putts: TBD
-				</div>
-			</div>
-		{{/each}}
+		
 		<div class="row">
 			<div class="col s12">
 				Oakley Country Club
