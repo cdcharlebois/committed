@@ -18,7 +18,6 @@ Template.golf.helpers({
 			console.log(p[i].fourPct);
 			a += p[i].fourPct * 1;
 		}
-		console.log("a --> " + a)
 		return ( a / p.length ).toFixed(2);
 	},
 	avgSeven: function(){
@@ -28,7 +27,6 @@ Template.golf.helpers({
 			console.log(p[i].sevenPct);
 			a += p[i].sevenPct * 1;
 		}
-		console.log("a --> " + a)
 		return ( a / p.length ).toFixed(2);
 	}
 });
@@ -36,23 +34,30 @@ Template.golf.helpers({
 Template.golf.events({
 	'click #addRound': function(e,t){
 		Session.set('canAddRound', true);
+		// should clear all the other session stuff that's stored
 	},
 	'click #doneRound': function(e,t){
-		var coursePar  = t.find("#coursePar").value*1,
-		    toParTotal = Session.get('frontTotal') + Session.get('backTotal');
+		var coursePar   = t.find("#coursePar").value*1,
+		    toParTotal  = Session.get('frontTotal') + Session.get('backTotal'),
+			scoresToPar = [], 
+			putts       = [],
+			distances   = [],
+			SGP         = 0,
+			putt        = 0;
 
-		//
-		// logging for stats
-		//
-		var scoresToPar = [], 
-			putts = [],
-			distances = [],
-			putt = 0;
 		for (var i = 1; i <=18; i++){
-			scoresToPar.push(t.find('#'+i).value*1);
-			putts.push(t.find('#putts'+i).value*1);
-			putt += t.find('#putts'+i).value*1;
-			distances.push(t.find('#pd'+i).value*1);
+			var hole = {
+				score:    t.find('#'+i).value*1,
+				putts:    t.find('#putts'+i).value*1,
+				distance: t.find('#pd'+i).value*1
+			}
+			scoresToPar.push(hole.score);
+			putts.push(hole.putts);
+			distances.push(hole.distances);
+
+			putt += hole.putts;
+			SGP += getStrokesGained(hole.putts, hole.distance);
+
 		}
 		Rounds.insert({
 			name:  t.find("#courseName").value,
@@ -60,7 +65,8 @@ Template.golf.events({
 			putt: putt,
 			scores: scoresToPar,
 			putts: putts,
-			distances: distances
+			distances: distances,
+			sgp: SGP
 		});
 
 		Session.set('canAddRound', false);
