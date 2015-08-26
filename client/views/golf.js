@@ -6,13 +6,13 @@ Template.golf.helpers({
 		return Session.get('canAddPractice');
 	},
 	rounds: function(){
-		return Rounds.find();
+		return Rounds.find({user: Meteor.user()});
 	},
 	practices: function(){
-		return Practices.find({},{sort: {when: -1}})
+		return Practices.find({user: Meteor.user()},{sort: {when: -1}})
 	},
 	avgFour: function(){
-		var p = Practices.find().fetch(),
+		var p = Practices.find({user: Meteor.user()}).fetch(),
 		    a = 0;
 		for (var i = 0; i < p.length; i++){
 			console.log(p[i].fourPct);
@@ -21,7 +21,7 @@ Template.golf.helpers({
 		return ( a / p.length ).toFixed(2);
 	},
 	avgSeven: function(){
-		var p = Practices.find().fetch(),
+		var p = Practices.find({user: Meteor.user()}).fetch(),
 		    a = 0;
 		for (var i = 0; i < p.length; i++){
 			console.log(p[i].sevenPct);
@@ -66,7 +66,8 @@ Template.golf.events({
 			scores: scoresToPar,
 			putts: putts,
 			distances: distances,
-			sgp: SGP
+			sgp: SGP,
+			user:  Meteor.user()
 		});
 
 		Session.set('canAddRound', false);
@@ -83,6 +84,7 @@ Template.golf.events({
 			Practices.insert({
 				fourPct:  fourPct,
 				sevenPct: sevenPct,
+				user:     Meteor.user(),
 				when:     new Date()
 			});	
 		}
