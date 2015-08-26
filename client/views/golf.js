@@ -41,9 +41,26 @@ Template.golf.events({
 		var coursePar  = t.find("#coursePar").value*1,
 		    toParTotal = Session.get('frontTotal') + Session.get('backTotal');
 
+		//
+		// logging for stats
+		//
+		var scoresToPar = [], 
+			putts = [],
+			distances = [],
+			putt = 0;
+		for (var i = 1; i <=18; i++){
+			scoresToPar.push(t.find('#'+i).value*1);
+			putts.push(t.find('#putts'+i).value*1);
+			putt += t.find('#putts'+i).value*1;
+			distances.push(t.find('#pd'+i).value*1);
+		}
 		Rounds.insert({
 			name:  t.find("#courseName").value,
-			score: coursePar + toParTotal
+			score: coursePar + toParTotal,
+			putt: putt,
+			scores: scoresToPar,
+			putts: putts,
+			distances: distances
 		});
 
 		Session.set('canAddRound', false);
