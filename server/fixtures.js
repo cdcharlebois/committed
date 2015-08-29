@@ -20,4 +20,20 @@ Meteor.startup(function(){
 			]
 		});
 	}
+
+	//
+	// Add default practices and scores
+	//
+	if (Practices.find().count() === 0){
+		Practices.insert({
+			fourPct:  100.00,
+			sevenPct: 25.05,
+			when:     new Date()
+		});
+		Practices.insert({
+			fourPct:  95.67,
+			sevenPct: 33.33,
+			when:     new Date()
+		});
+	}
 });

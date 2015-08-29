@@ -1,0 +1,113 @@
+<template name="roundInput">
+	<div class="row">
+		<div class="col s4">Course Name: <input type="text" id="courseName"></div>
+	 	<div class="col s4">Course Rating: <input type="text" id="courseRating"></div>	
+	 	<div class="col s4">Par: <input type="text" id="coursePar"></div>	
+	</div>
+	<div class="row">
+		<table>
+			<!-- header row -->
+			<tr>
+				<th>Measurement</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+				<th>OUT</th>
+				<th>10</th>
+				<th>11</th>
+				<th>12</th>
+				<th>13</th>
+				<th>14</th>
+				<th>15</th>
+				<th>16</th>
+				<th>17</th>
+				<th>18</th>
+				<th>IN</th>
+				<th>TOTAL</th>
+			</tr>
+			<!-- /header-->
+			<!-- STP (score to par) -->
+			<tr>
+				<td>Score To Par</td>
+				<td><input type="text" class="stp" id="1"></td>
+				<td><input type="text" class="stp" id="2"></td>
+				<td><input type="text" class="stp" id="3"></td>
+				<td><input type="text" class="stp" id="4"></td>
+				<td><input type="text" class="stp" id="5"></td>
+				<td><input type="text" class="stp" id="6"></td>
+				<td><input type="text" class="stp" id="7"></td>
+				<td><input type="text" class="stp" id="8"></td>
+				<td><input type="text" class="stp" id="9"></td>
+				<td>{{frontTotal}}</td>
+				<td><input type="text" class="stp" id="10"></td>
+				<td><input type="text" class="stp" id="11"></td>
+				<td><input type="text" class="stp" id="12"></td>
+				<td><input type="text" class="stp" id="13"></td>
+				<td><input type="text" class="stp" id="14"></td>
+				<td><input type="text" class="stp" id="15"></td>
+				<td><input type="text" class="stp" id="16"></td>
+				<td><input type="text" class="stp" id="17"></td>
+				<td><input type="text" class="stp" id="18"></td>
+				<td>{{backTotal}}</td>
+				<td>{{total}}</td>
+			</tr>
+			<tr>
+				<td>Putts</td>
+				<td><input type="text" class="putts" id="putts1"></td>
+				<td><input type="text" class="putts" id="putts2"></td>
+				<td><input type="text" class="putts" id="putts3"></td>
+				<td><input type="text" class="putts" id="putts4"></td>
+				<td><input type="text" class="putts" id="putts5"></td>
+				<td><input type="text" class="putts" id="putts6"></td>
+				<td><input type="text" class="putts" id="putts7"></td>
+				<td><input type="text" class="putts" id="putts8"></td>
+				<td><input type="text" class="putts" id="putts9"></td>
+				<td>{{frontTotalPutts}}</td>
+				<td><input type="text" class="putts" id="putts10"></td>
+				<td><input type="text" class="putts" id="putts11"></td>
+				<td><input type="text" class="putts" id="putts12"></td>
+				<td><input type="text" class="putts" id="putts13"></td>
+				<td><input type="text" class="putts" id="putts14"></td>
+				<td><input type="text" class="putts" id="putts15"></td>
+				<td><input type="text" class="putts" id="putts16"></td>
+				<td><input type="text" class="putts" id="putts17"></td>
+				<td><input type="text" class="putts" id="putts18"></td>
+				<td>{{backTotalPutts}}</td>
+				<td>{{totalPutts}}</td>
+			</tr>
+			<tr>
+				<td>First Putt Dist.</td>
+				<td><input type="text" class="pd" id="pd1"></td>
+				<td><input type="text" class="pd" id="pd2"></td>
+				<td><input type="text" class="pd" id="pd3"></td>
+				<td><input type="text" class="pd" id="pd4"></td>
+				<td><input type="text" class="pd" id="pd5"></td>
+				<td><input type="text" class="pd" id="pd6"></td>
+				<td><input type="text" class="pd" id="pd7"></td>
+				<td><input type="text" class="pd" id="pd8"></td>
+				<td><input type="text" class="pd" id="pd9"></td>
+				<td>{{frontTotalPd}}</td>
+				<td><input type="text" class="pd" id="pd10"></td>
+				<td><input type="text" class="pd" id="pd11"></td>
+				<td><input type="text" class="pd" id="pd12"></td>
+				<td><input type="text" class="pd" id="pd13"></td>
+				<td><input type="text" class="pd" id="pd14"></td>
+				<td><input type="text" class="pd" id="pd15"></td>
+				<td><input type="text" class="pd" id="pd16"></td>
+				<td><input type="text" class="pd" id="pd17"></td>
+				<td><input type="text" class="pd" id="pd18"></td>
+				<td>{{backTotalPd}}</td>
+				<td>{{totalPd}}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="row">
+		<button class="btn-floating btn-large waves-effect waves-light" id="doneRound"><i class="material-icons">done</i></button>
+	</div>
+</template>
