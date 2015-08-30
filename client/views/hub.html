@@ -2,15 +2,53 @@
 	<div class="container">
 		<h2>Hubspot Landing Page</h2>
 		<div class="row">
-			<div class="col s12">
+			<div class="col s8 offset-s2">
 				<div class="card">
 					<div class="card-content">
+						<h4>Sign Up</h4>
+						<div class="row">
+							<div class="input-field col s6">
+								<i class="material-icons prefix deep-orange-text text-darken-1">account_circle</i>
+								<input type="text" id="firstName" class="hub_in" >
+								<label for="firstName">First Name</label>
+							</div>
+							<div class="input-field col s6">
+								<input type="text" id="lastName" class="hub_in">	
+								<label for="lastName">Last Name</label>
+							</div>
+							
+							<div class="input-field col s12">
+								<i class="material-icons prefix deep-orange-text text-darken-1">email</i>
+								<input type="email" name="email" id="email" class="hub_in validate">	
+								<label for="email"  data-error="Oops" data-success="OK">Email</label>
+							</div>
+							
+						</div>
+						
+
 						<button id="test">Click me!</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- start of custom styles for this page -->
+	<style>
+		/* label color */
+		  .input-field label {
+		    color: #000;
+		  }
+		  /* label focus color */
+		  .input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label {
+		    color: #F47621;
+		  }
+		  /* label underline focus color */
+		  .input-field input[type=text]:focus, .input-field input[type=email]:focus {
+		    border-bottom: 1px solid #F47621;
+		    box-shadow: 0 1px 0 0 #F47621;
+		  }
+	</style>
+	<!-- end of custom styles for this page -->
 	<!-- Start of Async HubSpot Analytics Code -->
 	  <script type="text/javascript">
 	    (function(d,s,i,r) {
