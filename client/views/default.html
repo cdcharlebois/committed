@@ -13,11 +13,21 @@
         <div class="navbar-fixed">
             <nav>
                 <div class="nav-wrapper green darken-2">
-                    <a class="brand-logo center" href="/"><i class="large material-icons">code</i></a>
+                    <a class="brand-logo center" href="/">
+                        <span class="cclogo">&lt;/conner&gt;</span>
+                    </a>
+                    <a href="#" data-activates="sidebar" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="/work">Work</a></li>
+                        <!-- <li><a href="/work">Work</a></li> -->
                         <li><a href="/golf">Golf</a></li>
-                        <li><a href="/league">The League</a></li>
+                        <!-- <li><a href="/league">The League</a></li> -->
+                    </ul>
+                    <ul class="side-nav" id="sidebar">
+                        <!-- <li><a href="/work">Work</a></li> -->
+                        <li><a href="/golf">Golf</a></li>
+                        <!-- <li><a href="/league">The League</a></li> -->
                     </ul>
                 </div>
             </nav>
@@ -46,4 +56,9 @@
     </body>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript">
+    $ ( document ).ready(function(){
+        $(".button-collapse").sideNav();
+    });
+    </script>
 </template>
