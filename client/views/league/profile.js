@@ -39,7 +39,7 @@ Template.profile.events({
 			}
 		}
 
-		Meteor.users.update({_id:Meteor.userId()}, {$set: {profile: data}});
+		//Meteor.users.update({_id:Meteor.userId()}, {$set: {profile: data}});
 
 		Session.set('canEdit', false);
 	},

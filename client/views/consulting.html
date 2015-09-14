@@ -1,0 +1,60 @@
+<template name="consulting">
+<div class="grey lighten-5">
+	<!-- layout start -->
+	<div class="row">
+		<!-- sidebar start -->
+		<div class="col s12 m4 grey lighten-4">
+			{{> loginButtons}}	
+			<img src="http://placehold.it/300x1000&text=calendar%20goes%20here" width="100%"/>
+		</div>
+		<!-- sidebar end -->
+		{{#if currentUser}}
+		<!-- main start -->
+		<div class="col s12 m5">
+			<h5 class="center-align">NOTES</h5>
+			<div class="row">
+				<div class="col s12">
+					<button id="createNote" class="btn waves-effect waves-light blue darken-5">New Note</button>
+				</div>
+				<div class="col s12">
+					{{#if addingNote}}
+						{{>noteInput}}
+					{{/if}}
+				</div>
+			<!-- for each note belonging to this user.client -->
+			  {{#each myNotes}}
+			  	<div class="col s12">
+			  	  <div class="card">
+			  	    <div class="card-content">
+			  	      <span class="card-title blue-text text-darken-5">{{title}}</span>
+			  	      <p>{{body}}</p>
+			  	    </div>
+			  	    <div class="card-action">
+			  	      <a href="#">{{todo}}</a>
+			  	    </div>
+			  	  </div>
+			  	</div>
+			  {{/each}}
+			  <div class="col s12">
+			    <div class="card">
+			      <div class="card-content">
+			        <span class="card-title blue-text text-darken-5">Note Title</span>
+			        <p>I am a very simple card. I am good at containing small bits of information.
+			        I am convenient because I require little markup to use effectively.</p>
+			      </div>
+			      <div class="card-action">
+			        <a href="#">This will be an action...</a>
+			      </div>
+			    </div>
+			  </div>
+			<!-- end notes collection -->
+			</div>
+		</div>
+		<!-- main end -->
+		<div class="col s12 m3 grey lighten-4" >
+			<h5 class="center-align">ACTIONS</h5>
+		</div>
+		{{/if}}
+	</div>
+	<!-- layout end -->
+</div></template>
